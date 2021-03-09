@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Vue 编译器原理</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <div v-for="n in 4" :key="n">
+      <div v-once>{{ show }}</div>
+    </div> -->
+    <!-- <div>static node</div> -->
+    <comp></comp>
+  </div>
+  <script src="../../dist/vue.js"></script>
+  <script>
+    new Vue({
+    el: '#app',
+    data: {
+      show: true,
+      msg: 'hello vue'
+    },
+    components: {
+      'comp': {
+        props: {
+          msg: {
+            type: String,
+            default: 'hello'
+          }
+        },
+        template: `<div>{{ msg }}</div>`
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.show = false
+      }, 1000)
+    },
+    methods: {
+      init() {
+        console.log('init method')
+      }
+    },
+    watch: {
+      arr: function(val, oldV) {
+        console.log(val === oldV)
+      }
+    }
+  })
+  </script>
+</body>
+
+</html>
