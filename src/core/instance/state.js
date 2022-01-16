@@ -57,7 +57,7 @@ export function initState (vm: Component) {
   const opts = vm.$options
   // 处理 props 对象，为 props 对象的每个属性设置响应式，并将其代理到 vm 实例上
   if (opts.props) initProps(vm, opts.props)
-  // 处理 methos 对象，校验每个属性的值是否为函数、和 props 属性比对进行判重处理，最后得到 vm[key] = methods[key]
+  // 处理 methods 对象，校验每个属性的值是否为函数、和 props 属性比对进行判重处理，最后得到 vm[key] = methods[key]
   if (opts.methods) initMethods(vm, opts.methods)
   /**
    * 做了三件事
@@ -71,14 +71,14 @@ export function initState (vm: Component) {
     observe(vm._data = {}, true /* asRootData */)
   }
   /**
-   * 三件事：
+   * 做了三件事：
    *   1、为 computed[key] 创建 watcher 实例，默认是懒执行
    *   2、代理 computed[key] 到 vm 实例
    *   3、判重，computed 中的 key 不能和 data、props 中的属性重复
    */
   if (opts.computed) initComputed(vm, opts.computed)
   /**
-   * 三件事：
+   * 做了三件事：
    *   1、处理 watch 对象
    *   2、为 每个 watch.key 创建 watcher 实例，key 和 watcher 实例可能是 一对多 的关系
    *   3、如果设置了 immediate，则立即执行 回调函数

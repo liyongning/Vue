@@ -71,7 +71,7 @@ export function initMixin (Vue: Class<Component>) {
     initRender(vm)
     // 调用 beforeCreate 钩子函数
     callHook(vm, 'beforeCreate')
-    // 初始化组件的 inject 配置项，得到 result[key] = val 形式的配置对象，然后对结果数据进行响应式处理，并代理每个 key 到 vm 实例
+    // 初始化组件的 inject 配置项，得到 result[key] = val 形式的配置对象，然后对结果数据进行浅层的响应式处理（只处理了对象的第一层数据），并代理每个 key 到 vm 实例
     initInjections(vm) // resolve injections before data/props
     // 数据响应式的重点，处理 props、methods、data、computed、watch
     initState(vm)
